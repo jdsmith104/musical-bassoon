@@ -37,27 +37,34 @@ namespace CppTest
 	{
 		std::cout << "Object count: " << CppTest::TestClass::nobjs() << std::endl;
 	}
+	// Answer to C++ question 1
+	void Question1()
+	{
+		const std::unique_ptr<CppTest::TestClass> testObject1(new CppTest::TestClass());
+		CppTest::PrintObjectCount();
+
+		for (auto i = 0; i < 5; ++i)
+		{
+			const std::unique_ptr<CppTest::TestClass> testObject(new CppTest::TestClass());
+			CppTest::PrintObjectCount();
+		}
+
+		const std::unique_ptr<CppTest::TestClass> testObject2(new CppTest::TestClass());
+		CppTest::PrintObjectCount();
+		{
+			const std::unique_ptr<CppTest::TestClass> testObject3(new CppTest::TestClass());
+			CppTest::PrintObjectCount();
+		}
+
+		CppTest::PrintObjectCount();
+		
+	}
 }
+
 
 
 int main(int argc, char* argv[])
 {
-	const std::unique_ptr<CppTest::TestClass> testObject1(new CppTest::TestClass());
-	CppTest::PrintObjectCount();
-
-	for (auto i = 0; i < 5; ++i)
-	{
-		const std::unique_ptr<CppTest::TestClass> testObject(new CppTest::TestClass());
-		CppTest::PrintObjectCount();
-	}
-
-	const std::unique_ptr<CppTest::TestClass> testObject2(new CppTest::TestClass());
-	CppTest::PrintObjectCount();
-	{
-		const std::unique_ptr<CppTest::TestClass> testObject3(new CppTest::TestClass());
-		CppTest::PrintObjectCount();
-	}
-	
-	CppTest::PrintObjectCount();
+	CppTest::Question1();
 
 }
