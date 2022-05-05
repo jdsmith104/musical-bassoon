@@ -1,1 +1,6 @@
 Questions/.vscode/
+Questions/cpp-test/.vs/cpp-test/v16/
+*.user
+Questions/cpp-test/cpp-test/Debug/
+*.pdb
+*.exe
