@@ -154,7 +154,7 @@ class DuplicateNumberFinder:
             result = list(duplicate_values)
         return result
 
-# Answer to Question 2
+# Answer to General Question 2
 
 
 class DuplicateNumberFinderTest(unittest.TestCase):
@@ -233,6 +233,51 @@ class DuplicateNumberFinderTest(unittest.TestCase):
         output = dnf.get_duplicates(list_1=list_1, list_2=list_2)
 
         self.assertListEqual(expected_output, output)
+
+
+class Question4:
+    def __init__(self) -> None:
+        pass
+
+    def solve(self, n: int) -> int:
+        # Worked out this formula by hand
+        # e.g.
+        # n + nn + nnn + nnnn
+        # = n + (10n+n) + (100n+10n+n) + (1000n+100n+10n+n)
+        # = 4n + 30n + 200n + 1000n
+        # = 1234n
+        return 1234*n
+
+# Answer to general question 4
+
+
+class Question4Test(unittest.TestCase):
+    def test_case_1(self):
+        q4 = Question4()
+
+        q4_input = 3
+        expected_output = 3702
+        output = q4.solve(q4_input)
+
+        self.assertEqual(expected_output, output)
+
+    def test_case_2(self):
+        q4 = Question4()
+
+        q4_input = 1
+        expected_output = 1234
+        output = q4.solve(q4_input)
+
+        self.assertEqual(expected_output, output)
+
+    def test_case_3(self):
+        q4 = Question4()
+
+        q4_input = 9
+        expected_output = 11106
+        output = q4.solve(q4_input)
+
+        self.assertEqual(expected_output, output)
 
 
 if __name__ == "__main__":
