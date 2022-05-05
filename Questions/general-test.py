@@ -123,5 +123,117 @@ class FibonacciNumberGeneratorTest(unittest.TestCase):
         self.assertAlmostEqual(expected_output_scaled, output_scaled, 7)
 
 
+class DuplicateNumberFinder:
+    def __init__(self) -> None:
+        pass
+
+    # Assumes lists are sorted in ascending order
+    def get_duplicates(self, list_1: list, list_2: list) -> list:
+        result = list()
+
+        if list_1 and list_2:
+
+            ptr_1: int = 0
+            ptr_2: int = 0
+
+            duplicate_values = set()
+
+            while ptr_1 < len(list_1) and ptr_2 < len(list_2):
+                val_1 = list_1[ptr_1]
+                val_2 = list_2[ptr_2]
+
+                if val_1 == val_2:
+                    duplicate_values.add(val_1)
+                    ptr_1 += 1
+                    ptr_2 += 1
+                elif val_1 < val_2:
+                    ptr_1 += 1
+                elif val_2 < val_1:
+                    ptr_2 += 1
+
+            result = list(duplicate_values)
+        return result
+
+# Answer to Question 2
+
+
+class DuplicateNumberFinderTest(unittest.TestCase):
+    def test_case_1(self):
+        dnf = DuplicateNumberFinder()
+
+        list_1 = [1, 2, 4]
+        list_2 = [1, 3, 4]
+        expected_output = [1, 4]
+        output = dnf.get_duplicates(list_1=list_1, list_2=list_2)
+
+        self.assertListEqual(expected_output, output)
+
+    # Test empty inputs
+    def test_case_2(self):
+        dnf = DuplicateNumberFinder()
+
+        list_1 = []
+        list_2 = [1, 3, 4]
+        expected_output = []
+        output = dnf.get_duplicates(list_1=list_1, list_2=list_2)
+
+        self.assertListEqual(expected_output, output)
+
+    # Test empty inputs
+    def test_case_3(self):
+        dnf = DuplicateNumberFinder()
+
+        list_1 = [1, 3, 4]
+        list_2 = []
+        expected_output = []
+        output = dnf.get_duplicates(list_1=list_1, list_2=list_2)
+
+        self.assertListEqual(expected_output, output)
+
+    # No matches
+    def test_case_4(self):
+        dnf = DuplicateNumberFinder()
+
+        list_1 = [10, 20, 40]
+        list_2 = [1, 3, 4]
+        expected_output = []
+        output = dnf.get_duplicates(list_1=list_1, list_2=list_2)
+
+        self.assertListEqual(expected_output, output)
+
+    # Test list_2 is longer
+    def test_case_5(self):
+        dnf = DuplicateNumberFinder()
+
+        list_1 = [4]
+        list_2 = [1, 3, 4]
+        expected_output = [4]
+        output = dnf.get_duplicates(list_1=list_1, list_2=list_2)
+
+        self.assertListEqual(expected_output, output)
+
+    # Test list_1 is longer and the first value is a match
+    def test_case_6(self):
+        dnf = DuplicateNumberFinder()
+
+        list_1 = [1, 2, 4]
+        list_2 = [1]
+        expected_output = [1]
+        output = dnf.get_duplicates(list_1=list_1, list_2=list_2)
+
+        self.assertListEqual(expected_output, output)
+
+    # Test multiple matches aren't counted
+    def test_case_7(self):
+        dnf = DuplicateNumberFinder()
+
+        list_1 = [1, 1, 4]
+        list_2 = [1, 1, 1]
+        expected_output = [1]
+        output = dnf.get_duplicates(list_1=list_1, list_2=list_2)
+
+        self.assertListEqual(expected_output, output)
+
+
 if __name__ == "__main__":
     unittest.main()
