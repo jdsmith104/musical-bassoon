@@ -35,7 +35,7 @@ class FibonacciNumberGenerator:
                                                                1] + self.calculated_result[x-2]
             return self.calculated_result[x]
 
-    # Answer to Q1. Every third fibonacci number from f(1) is even
+    # Solution to Q1. Every third fibonacci number from f(1) is even
     def solve_question(self, n: int = 100) -> int:
 
         # 100th even fibonacci number index
@@ -154,7 +154,7 @@ class DuplicateNumberFinder:
             result = list(duplicate_values)
         return result
 
-# Answer to General Question 2
+# Solution to General Question 2
 
 
 class DuplicateNumberFinderTest(unittest.TestCase):
@@ -234,6 +234,78 @@ class DuplicateNumberFinderTest(unittest.TestCase):
 
         self.assertListEqual(expected_output, output)
 
+# Assuming the decimal representation of 134 == "100 + 30 +4"
+
+
+class Question3:
+    def __init__(self) -> None:
+        self.odd_digits = ['1', '3', '5', '7', '9']
+
+    def Solve(self, pos_integer: int) -> bool:
+        pos_integer_string = str(pos_integer)
+        for char in pos_integer_string:
+            if int(char) % 2 == 1:
+                return False
+        return True
+
+# Solution to quesiton 3
+
+
+class Question3Test(unittest.TestCase):
+    def test_case_1(self):
+        q3 = Question3()
+        input_integer: int = 134
+        result = q3.Solve(input_integer)
+        self.assertEqual(False, result)
+
+    def test_case_2(self):
+        q3 = Question3()
+        input_integer: int = 334
+        result = q3.Solve(input_integer)
+        self.assertEqual(False, result)
+
+    def test_case_3(self):
+        q3 = Question3()
+        input_integer: int = 234
+        result = q3.Solve(input_integer)
+        self.assertEqual(False, result)
+
+    def test_case_4(self):
+        q3 = Question3()
+        input_integer: int = 904
+        result = q3.Solve(input_integer)
+        self.assertEqual(False, result)
+
+    def test_case_5(self):
+        q3 = Question3()
+        input_integer: int = 3
+        result = q3.Solve(input_integer)
+        self.assertEqual(False, result)
+
+    def test_case_6(self):
+        q3 = Question3()
+        input_integer: int = 2
+        result = q3.Solve(input_integer)
+        self.assertEqual(True, result)
+
+    def test_case_7(self):
+        q3 = Question3()
+        input_integer: int = 482
+        result = q3.Solve(input_integer)
+        self.assertEqual(True, result)
+
+    def test_case_8(self):
+        q3 = Question3()
+        input_integer: int = 602
+        result = q3.Solve(input_integer)
+        self.assertEqual(True, result)
+
+    def test_case_9(self):
+        q3 = Question3()
+        input_integer: int = 4068
+        result = q3.Solve(input_integer)
+        self.assertEqual(True, result)
+
 
 class Question4:
     def __init__(self) -> None:
@@ -248,7 +320,7 @@ class Question4:
         # = 1234n
         return 1234*n
 
-# Answer to general question 4
+# Solution to general question 4
 
 
 class Question4Test(unittest.TestCase):
