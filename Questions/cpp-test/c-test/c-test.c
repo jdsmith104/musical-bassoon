@@ -1,23 +1,21 @@
 // c-test.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+#include "c-test-header.h"
+
 
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct node_t
-{
-	unsigned v;
-	struct node_t* next;
-
-} node_t;
-
-
 node_t* CreateNode(const unsigned val)
 {
 	node_t* node = malloc(sizeof(node_t));
-	node->v = val;
-	node->next = NULL;
-	return node;
+	if (node)
+	{
+		node->v = val;
+		node->next = NULL;
+		return node;
+	}
+	return NULL;
 }
 
 /**
@@ -59,7 +57,7 @@ struct node_t* even_nodes(struct node_t** head)
 			// Check if node that follows previousNode is even 
 			if (previousNode->next->v % 2 == 0)
 			{
-				const node_t* removedNode = remove_next_node(&previousNode);
+				node_t* removedNode = remove_next_node(&previousNode);
 				// Add removed node to return node (linked list of nodes with even values)
 				returnNode->next = removedNode;
 				returnNode = returnNode->next;
@@ -108,9 +106,52 @@ void Question1()
 	print_list(head);
 }
 
+unsigned char reverse_byte(const unsigned char byte)
+{
+	static const unsigned char kReverseByteLookup[16] = { 0x0, 0x8, 0x4, 0xc, 0x2, 0xa, 0x6, 0xe, 0x1, 0x9, 0x5, 0xd, 0x3, 0xb, 0x7, 0xf};
+	const unsigned char top = byte >> 4;
+	const unsigned char bottom = 0x0F & byte;
+	const unsigned char reversedByte = (kReverseByteLookup[bottom] << 4) | kReverseByteLookup[top];
+	return reversedByte;
+}
+
+void reverse_bytes(unsigned char * buf, const unsigned int bufSize)
+{
+	if (bufSize > 0)
+	{
+		unsigned char* reversedBuf = malloc(sizeof(unsigned char) * bufSize);
+		if (reversedBuf)
+		{
+			for (size_t i = 0; i < bufSize; i++)
+			{
+				reversedBuf[i] = reverse_byte(buf[bufSize - 1 - i]);
+			}
+
+			// Assign new buffer
+			for (size_t i = 0; i < bufSize; i++)
+			{
+				buf[i] = reversedBuf[i];
+			}
+		}
+	}
+}
+
+void Question2()
+{
+	unsigned char testBuf[5] = { 0b10000001,0b11111111,0b10000001,0b00000001,0b10000000 };
+	unsigned int bufSize = sizeof(testBuf) / sizeof(unsigned char);
+	reverse_bytes(testBuf, bufSize);
+	for (unsigned int i = 0; i < bufSize; ++i)
+	{
+		// Print for manual inspection
+		printf("%u ", testBuf[i]);
+	}
+}
+
 int main()
 {
 	Question1();
+	Question2();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
