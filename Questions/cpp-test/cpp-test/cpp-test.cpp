@@ -6,7 +6,6 @@
 #include <array>
 #include <iostream>
 #include <vector>
-#include "c-test.h"
 
 namespace CppTest
 {
