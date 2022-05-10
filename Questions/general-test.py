@@ -242,7 +242,9 @@ class Question3:
         self.odd_digits = ['1', '3', '5', '7', '9']
 
     def Solve(self, pos_integer: int) -> bool:
+        # Cast to string
         pos_integer_string = str(pos_integer)
+        # If any character in the string is odd, the mod of it and 2 is 1
         for char in pos_integer_string:
             if int(char) % 2 == 1:
                 return False
